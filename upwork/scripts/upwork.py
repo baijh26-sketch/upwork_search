@@ -24,6 +24,7 @@ Flags:
 import argparse
 import hashlib
 import json
+import os
 import re
 import sqlite3
 import sys
@@ -43,8 +44,12 @@ for _stream in (sys.stdout, sys.stderr):
 
 SCRIPT_DIR = Path(__file__).resolve().parent
 SKILL_DIR = SCRIPT_DIR.parent
-DATA_DIR = SKILL_DIR / "data"
-PROFILE_DIR = SKILL_DIR / "profile"
+
+# 数据(jobs.db)与登录态(profile)放固定位置,不随 skill 代码走:
+#   删/重装 skill 不丢数据;改代码不污染数据。默认 ~/.upwork,可用环境变量 UPWORK_DATA_DIR 覆盖。
+_DATA_ROOT = Path(os.environ.get("UPWORK_DATA_DIR") or (Path.home() / ".upwork"))
+DATA_DIR = _DATA_ROOT
+PROFILE_DIR = _DATA_ROOT / "profile"
 DB_PATH = DATA_DIR / "jobs.db"
 
 MOST_RECENT_URL = "https://www.upwork.com/nx/find-work/most-recent"
