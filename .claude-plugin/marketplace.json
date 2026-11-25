@@ -1,0 +1,13 @@
+{
+  "name": "baijh26-skills",
+  "owner": {
+    "name": "baijh26-sketch"
+  },
+  "plugins": [
+    {
+      "name": "upwork",
+      "source": "./upwork",
+      "description": "Fetch, search, and archive Upwork job postings with employer credit signals (country, payment-verified, total paid, hires, rating, proposal count)."
+    }
+  ]
+}
